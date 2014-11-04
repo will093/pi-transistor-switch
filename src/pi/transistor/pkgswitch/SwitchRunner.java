@@ -7,6 +7,7 @@
 package pi.transistor.pkgswitch;
 
 import com.pi4j.io.gpio.RaspiPin;
+import java.util.Scanner;
 
 /**
  *
@@ -14,15 +15,18 @@ import com.pi4j.io.gpio.RaspiPin;
  */
 public class SwitchRunner {
     
-    public static void main(String[] args) throws InterruptedException {
-        TransistorSwitch mySwitch;
-        mySwitch = new TransistorSwitch(RaspiPin.GPIO_01);
+    public static void main(String[] args) {
+        TransistorSwitch mySwitch = new TransistorSwitch(RaspiPin.GPIO_01);
+        Scanner userInput = new Scanner(System.in);
+        String input;
         while (true) {
-            mySwitch.open();
-            Thread.sleep(1000);
-            mySwitch.close();
-            Thread.sleep(1000);
+            System.out.println("Enter 'o' to open switch or 'c' to close: ");
+            input = userInput.next();
+            if (input.equals("o")) {
+                mySwitch.open();
+            } else if(input.equals("c")) {
+                mySwitch.close();
+            }
         }
-    }
-    
+    }    
 }
